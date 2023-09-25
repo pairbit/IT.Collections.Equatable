@@ -26,8 +26,17 @@
 	<DebugType>full</DebugType>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Include="Readme.md" Pack="true" PackagePath="\" />
+    <None Include="..\Icon.png" Pack="true" PackagePath="\" />
+  </ItemGroup>
+
   <ItemGroup Condition="$(TargetFramework) == 'netstandard2.0'">
     <PackageReference Include="Microsoft.Bcl.HashCode" Version="1.1.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" PrivateAssets="All" />
+  </ItemGroup>
+	
 </Project>
