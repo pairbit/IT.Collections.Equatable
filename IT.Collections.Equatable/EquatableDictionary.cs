@@ -22,6 +22,18 @@ public class EquatableDictionary<TKey, TValue> : Dictionary<TKey, TValue>, IEqua
         _valueComparer = valueComparer ?? EqualityComparer<TValue>.Default;
     }
 
+#if NETSTANDARD2_0
+
+    public EquatableDictionary(
+        IDictionary<TKey, TValue> dictionary,
+        IEqualityComparer<TKey>? keyComparer,
+        IEqualityComparer<TValue>? valueComparer) : base(dictionary, keyComparer)
+    {
+        _valueComparer = valueComparer ?? EqualityComparer<TValue>.Default;
+    }
+
+#else
+
     public EquatableDictionary(
         IEnumerable<KeyValuePair<TKey, TValue>> collection,
         IEqualityComparer<TKey>? keyComparer,
@@ -30,13 +42,15 @@ public class EquatableDictionary<TKey, TValue> : Dictionary<TKey, TValue>, IEqua
         _valueComparer = valueComparer ?? EqualityComparer<TValue>.Default;
     }
 
+#endif
+
     public IEqualityComparer<TValue> ValueComparer => _valueComparer;
 
     public override bool Equals(object? obj) => Equals(obj as EquatableDictionary<TKey, TValue>);
 
     public bool Equals(EquatableDictionary<TKey, TValue>? other)
         => ReferenceEquals(this, other) || other is not null &&
-           Comparer == other.Comparer && 
+           Comparer == other.Comparer &&
            Count == other.Count &&
            _valueComparer == other._valueComparer && SequenceEqual(other);
 
@@ -58,8 +72,8 @@ public class EquatableDictionary<TKey, TValue> : Dictionary<TKey, TValue>, IEqua
 
         while (e1.MoveNext())
         {
-            if (!(e2.MoveNext() 
-                && Comparer.Equals(e1.Current.Key, e2.Current.Key) 
+            if (!(e2.MoveNext()
+                && Comparer.Equals(e1.Current.Key, e2.Current.Key)
                 && _valueComparer.Equals(e1.Current.Value, e2.Current.Value)))
             {
                 return false;

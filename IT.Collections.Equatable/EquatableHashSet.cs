@@ -10,9 +10,13 @@ public class EquatableHashSet<T> : HashSet<T>, IEquatable<EquatableHashSet<T>>
     {
     }
 
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+
     public EquatableHashSet(int capacity, IEqualityComparer<T>? comparer = null) : base(capacity, comparer)
     {
     }
+
+#endif
 
     public EquatableHashSet(IEnumerable<T> collection, IEqualityComparer<T>? comparer = null) : base(collection, comparer)
     {

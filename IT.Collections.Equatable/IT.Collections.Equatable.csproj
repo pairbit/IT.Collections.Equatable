@@ -1,8 +1,33 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
-    <Nullable>enable</Nullable>
+	<TargetFrameworks>netstandard2.0;netstandard2.1;netcoreapp3.1;net6.0;net7.0</TargetFrameworks>
+	<LangVersion>latest</LangVersion>
+	<Nullable>enable</Nullable>
+	<PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+	<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+	<Company />
+	<Description></Description>
+	<PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <RepositoryUrl>https://github.com/pairbit/IT.Collections.Equatable</RepositoryUrl>
+	<PublishRepositoryUrl>true</PublishRepositoryUrl>
+	<Authors>Ivan Tikhonov</Authors>
+	<Copyright>Ivan Tikhonov © 2023</Copyright>
+	<Version>2.0.0-pre3</Version>
+	<PackageTags>Collections Equatable</PackageTags>
+	<PackageReadmeFile>Readme.md</PackageReadmeFile>
+	<PackageIcon>Icon.png</PackageIcon>
+	<PackageReleaseNotes></PackageReleaseNotes>
+	<SignAssembly>true</SignAssembly>
+	<AssemblyOriginatorKeyFile>..\IT.snk</AssemblyOriginatorKeyFile>
+	<IncludeSymbols>true</IncludeSymbols>
+	<SymbolPackageFormat>snupkg</SymbolPackageFormat>
+	<EmbedUntrackedSources>true</EmbedUntrackedSources>
+	<DebugType>full</DebugType>
   </PropertyGroup>
+
+  <ItemGroup Condition="$(TargetFramework) == 'netstandard2.0'">
+    <PackageReference Include="Microsoft.Bcl.HashCode" Version="1.1.1" />
+  </ItemGroup>
 
 </Project>
