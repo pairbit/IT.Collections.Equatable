@@ -1,1 +1,1 @@
-# IT.Redis.Entity
+# IT.Collections.Equatable
