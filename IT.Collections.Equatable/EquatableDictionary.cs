@@ -10,14 +10,14 @@ public class EquatableDictionary<TKey, TValue> : Dictionary<TKey, TValue>, IEqua
 
     public EquatableDictionary(
         IEqualityComparer<TKey>? keyComparer,
-        IEqualityComparer<TValue>? valueComparer) : base(keyComparer)
+        IEqualityComparer<TValue>? valueComparer = null) : base(keyComparer)
     {
         _valueComparer = valueComparer ?? EqualityComparer<TValue>.Default;
     }
 
     public EquatableDictionary(int capacity,
         IEqualityComparer<TKey>? keyComparer,
-        IEqualityComparer<TValue>? valueComparer) : base(capacity, keyComparer)
+        IEqualityComparer<TValue>? valueComparer = null) : base(capacity, keyComparer)
     {
         _valueComparer = valueComparer ?? EqualityComparer<TValue>.Default;
     }
@@ -27,7 +27,7 @@ public class EquatableDictionary<TKey, TValue> : Dictionary<TKey, TValue>, IEqua
     public EquatableDictionary(
         IDictionary<TKey, TValue> dictionary,
         IEqualityComparer<TKey>? keyComparer,
-        IEqualityComparer<TValue>? valueComparer) : base(dictionary, keyComparer)
+        IEqualityComparer<TValue>? valueComparer = null) : base(dictionary, keyComparer)
     {
         _valueComparer = valueComparer ?? EqualityComparer<TValue>.Default;
     }
@@ -37,7 +37,7 @@ public class EquatableDictionary<TKey, TValue> : Dictionary<TKey, TValue>, IEqua
     public EquatableDictionary(
         IEnumerable<KeyValuePair<TKey, TValue>> collection,
         IEqualityComparer<TKey>? keyComparer,
-        IEqualityComparer<TValue>? valueComparer) : base(collection, keyComparer)
+        IEqualityComparer<TValue>? valueComparer = null) : base(collection, keyComparer)
     {
         _valueComparer = valueComparer ?? EqualityComparer<TValue>.Default;
     }
