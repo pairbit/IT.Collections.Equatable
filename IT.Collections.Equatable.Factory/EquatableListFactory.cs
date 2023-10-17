@@ -1,7 +1,6 @@
 ﻿using IT.Collections.Factory;
 using IT.Collections.Factory.Factories;
 using System;
-using System.Collections.Generic;
 
 namespace IT.Collections.Equatable.Factory;
 
@@ -64,7 +63,7 @@ public class EquatableListFactory : ListFactory
     }
 
 #if !NET5_0_OR_GREATER
-    protected override List<T> NewList<T>(int capacity, in Comparers<T> comparers)
+    protected override System.Collections.Generic.List<T> NewList<T>(int capacity, in Comparers<T> comparers)
         => new EquatableList<T>(capacity, comparers.EqualityComparer);
 #endif
 }
