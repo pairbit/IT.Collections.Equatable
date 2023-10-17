@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+	<TargetFrameworks>netstandard2.0;netstandard2.1;netcoreapp3.1;net461;net472;net6.0;net7.0</TargetFrameworks>
+	<LangVersion>latest</LangVersion>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="IT.Collections.Factory" Version="2.0.0-pre3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\IT.Collections.Equatable\IT.Collections.Equatable.csproj" />
+  </ItemGroup>
+
+</Project>

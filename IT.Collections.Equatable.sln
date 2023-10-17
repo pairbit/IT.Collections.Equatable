@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.33627.172
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IT.Collections.Equatable", "IT.Collections.Equatable\IT.Collections.Equatable.csproj", "{432298C1-D706-425A-BDD6-29294925A089}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IT.Collections.Equatable", "IT.Collections.Equatable\IT.Collections.Equatable.csproj", "{432298C1-D706-425A-BDD6-29294925A089}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IT.Collections.Equatable.Factory", "IT.Collections.Equatable.Factory\IT.Collections.Equatable.Factory.csproj", "{C6F614C9-B9CE-4D49-BDAF-1CB2460D209F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{432298C1-D706-425A-BDD6-29294925A089}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{432298C1-D706-425A-BDD6-29294925A089}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{432298C1-D706-425A-BDD6-29294925A089}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C6F614C9-B9CE-4D49-BDAF-1CB2460D209F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C6F614C9-B9CE-4D49-BDAF-1CB2460D209F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C6F614C9-B9CE-4D49-BDAF-1CB2460D209F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C6F614C9-B9CE-4D49-BDAF-1CB2460D209F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

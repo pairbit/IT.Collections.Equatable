@@ -22,7 +22,7 @@ public class EquatableDictionary<TKey, TValue> : Dictionary<TKey, TValue>, IEqua
         _valueComparer = valueComparer ?? EqualityComparer<TValue>.Default;
     }
 
-#if NETSTANDARD2_0
+#if NETSTANDARD2_0 || NET461_OR_GREATER
 
     public EquatableDictionary(
         IDictionary<TKey, TValue> dictionary,
