@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="IT.Collections.Factory" Version="2.0.0-pre3" />
+    <PackageReference Include="IT.Collections.Factory" Version="2.0.0" />
   </ItemGroup>
 
   <ItemGroup>

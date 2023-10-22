@@ -27,14 +27,18 @@ public class EquatableList<T> : List<T>, IEquatable<EquatableList<T>>
 
     public override bool Equals(object? obj) => Equals(obj as EquatableList<T>);
 
-    public bool Equals(EquatableList<T>? other) => ReferenceEquals(this, other) || other is not null && this.SequenceEqual(other, _comparer);
+    public bool Equals(EquatableList<T>? other)
+        => this == other || (other != null &&
+        (_comparer == other._comparer || (_comparer != null && _comparer.Equals(other._comparer))) &&
+        this.SequenceEqual(other, _comparer));
 
     public override int GetHashCode()
     {
         var hash = new HashCode();
+        var comparer = _comparer;
         for (int i = 0; i < Count; i++)
         {
-            hash.Add(this[i], _comparer);
+            hash.Add(this[i], comparer);
         }
         return hash.ToHashCode();
     }

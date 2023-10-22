@@ -6,9 +6,7 @@ namespace IT.Collections.Equatable.Factory;
 
 public class EquatableListFactory : ListFactory
 {
-    public static new readonly EquatableListFactory Default = new();
-
-    public override EnumerableType Type => EnumerableType.Equatable;
+    public override EnumerableKind Kind => EnumerableKind.Equatable;
 
     public
 #if NET5_0_OR_GREATER
@@ -64,6 +62,6 @@ public class EquatableListFactory : ListFactory
 
 #if !NET5_0_OR_GREATER
     protected override System.Collections.Generic.List<T> NewList<T>(int capacity, in Comparers<T> comparers)
-        => new EquatableList<T>(capacity, comparers.EqualityComparer);
+        => capacity == 0 ? new EquatableList<T>(comparers.EqualityComparer) : new EquatableList<T>(capacity, comparers.EqualityComparer);
 #endif
 }
