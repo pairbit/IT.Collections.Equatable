@@ -41,6 +41,7 @@ public class EquatableLinkedList<T> : LinkedList<T>, IEquatable<EquatableLinkedL
     {
         var hash = new HashCode();
         var comparer = _comparer;
+        hash.Add(comparer);
         foreach (var item in this)
         {
             hash.Add(item, comparer);

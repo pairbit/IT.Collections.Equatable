@@ -83,6 +83,8 @@ public class EquatableDictionary<TKey, TValue> : Dictionary<TKey, TValue>, IEqua
         var hash = new HashCode();
         var keyComparer = Comparer;
         var valueComparer = _valueComparer;
+        hash.Add(keyComparer);
+        hash.Add(valueComparer);
         foreach (var item in this)
         {
             hash.Add(item.Key, keyComparer);

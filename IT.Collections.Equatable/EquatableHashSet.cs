@@ -49,6 +49,7 @@ public class EquatableHashSet<T> : HashSet<T>, IEquatable<EquatableHashSet<T>>
     {
         var hash = new HashCode();
         var comparer = Comparer;
+        hash.Add(comparer);
         foreach (var item in this)
         {
             hash.Add(item, comparer);

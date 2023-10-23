@@ -55,6 +55,7 @@ public class EquatableStack<T> : Stack<T>, IEquatable<EquatableStack<T>>
     {
         var hash = new HashCode();
         var comparer = _comparer;
+        hash.Add(comparer);
         foreach (var item in this)
         {
             hash.Add(item, comparer);

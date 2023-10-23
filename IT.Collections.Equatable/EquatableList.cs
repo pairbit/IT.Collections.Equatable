@@ -47,6 +47,7 @@ public class EquatableList<T> : List<T>, IEquatable<EquatableList<T>>
     {
         var hash = new HashCode();
         var comparer = _comparer;
+        hash.Add(comparer);
         for (int i = 0; i < Count; i++)
         {
             hash.Add(this[i], comparer);

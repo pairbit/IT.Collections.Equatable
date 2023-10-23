@@ -55,6 +55,7 @@ public class EquatableQueue<T> : Queue<T>, IEquatable<EquatableQueue<T>>
     {
         var hash = new HashCode();
         var comparer = _comparer;
+        hash.Add(comparer);
         foreach (var item in this)
         {
             hash.Add(item, comparer);
