@@ -29,6 +29,9 @@ jobs:
     
       - name: Build
         run: dotnet build IT.Collections.Equatable.sln --configuration Release --no-restore 
+        
+      - name: Test
+        run: dotnet test IT.Collections.Equatable.Tests/IT.Collections.Equatable.Tests.csproj --no-restore
 
   publish:
     needs: [build]
@@ -41,3 +44,9 @@ jobs:
             PROJECT_FILE_PATH: IT.Collections.Equatable/IT.Collections.Equatable.csproj
             NUGET_KEY: ${{secrets.NUGET}}
             TAG_COMMIT: true
+
+      - name: Publish IT.Collections.Equatable.Factory
+        uses: pairbit/publish-nuget@v2.6.0
+        with:
+            PROJECT_FILE_PATH: IT.Collections.Equatable.Factory/IT.Collections.Equatable.Factory.csproj
+            NUGET_KEY: ${{secrets.NUGET}}
