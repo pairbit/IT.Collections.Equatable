@@ -35,7 +35,7 @@ public class EquatableQueue<T> : Queue<T>, IEquatable<EquatableQueue<T>>
     }
 #endif
 
-    public IEqualityComparer<T> EqualityComparer => _comparer ?? EqualityComparer<T>.Default;
+    public IEqualityComparer<T> Comparer => _comparer ?? EqualityComparer<T>.Default;
 
     public override bool Equals(object? obj) => Equals(obj as EquatableQueue<T>);
 

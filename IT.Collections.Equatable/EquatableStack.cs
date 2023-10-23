@@ -35,7 +35,7 @@ public class EquatableStack<T> : Stack<T>, IEquatable<EquatableStack<T>>
     }
 #endif
 
-    public IEqualityComparer<T> EqualityComparer => _comparer ?? EqualityComparer<T>.Default;
+    public IEqualityComparer<T> Comparer => _comparer ?? EqualityComparer<T>.Default;
 
     public override bool Equals(object? obj) => Equals(obj as EquatableStack<T>);
 

@@ -102,6 +102,30 @@ public class Tests
     }
 
     [Test]
+    public void ManualTest()
+    {
+        var dictionary = new EquatableDictionary<string, string>();
+        var dictionary2 = new EquatableDictionary<string, string>();
+
+        Assert.That(dictionary.GetHashCode().Equals(dictionary2.GetHashCode()), Is.True);
+        Assert.That(dictionary.Equals(dictionary2), Is.True);
+
+        dictionary.Add("test1", "TEST1");
+        dictionary.Add("test2", "TEST2");
+        dictionary2.Add("test1", "TEST1");
+        dictionary2.Add("test2", "TEST2");
+        
+        Assert.That(dictionary.GetHashCode().Equals(dictionary2.GetHashCode()), Is.True);
+        Assert.That(dictionary.Equals(dictionary2), Is.True);
+
+        dictionary.Add("test3", "TEST3");
+        dictionary2.Add("test3", "TeST3");
+        
+        Assert.That(dictionary.GetHashCode().Equals(dictionary2.GetHashCode()), Is.False);
+        Assert.That(dictionary.Equals(dictionary2), Is.False);
+    }
+
+    [Test]
     public void RegistryTest()
     {
         FactoryStringTest<EquatableHashSetFactory>();

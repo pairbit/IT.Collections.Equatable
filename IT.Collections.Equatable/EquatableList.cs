@@ -27,7 +27,7 @@ public class EquatableList<T> : List<T>, IEquatable<EquatableList<T>>
             _comparer = comparer;
     }
 
-    public IEqualityComparer<T>? EqualityComparer => _comparer ?? EqualityComparer<T>.Default;
+    public IEqualityComparer<T>? Comparer => _comparer ?? EqualityComparer<T>.Default;
 
     public override bool Equals(object? other) => Equals(other as EquatableList<T>);
 

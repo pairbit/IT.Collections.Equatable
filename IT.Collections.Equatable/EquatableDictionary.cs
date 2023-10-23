@@ -11,7 +11,7 @@ public class EquatableDictionary<TKey, TValue> : Dictionary<TKey, TValue>, IEqua
     private readonly IEqualityComparer<TValue>? _valueComparer;
 
     public EquatableDictionary(
-        IEqualityComparer<TKey>? keyComparer,
+        IEqualityComparer<TKey>? keyComparer = null,
         IEqualityComparer<TValue>? valueComparer = null) : base(keyComparer)
     {
         if (valueComparer != null && valueComparer != EqualityComparer<TValue>.Default)
@@ -19,7 +19,7 @@ public class EquatableDictionary<TKey, TValue> : Dictionary<TKey, TValue>, IEqua
     }
 
     public EquatableDictionary(int capacity,
-        IEqualityComparer<TKey>? keyComparer,
+        IEqualityComparer<TKey>? keyComparer = null,
         IEqualityComparer<TValue>? valueComparer = null) : base(capacity, keyComparer)
     {
         if (valueComparer != null && valueComparer != EqualityComparer<TValue>.Default)
@@ -30,7 +30,7 @@ public class EquatableDictionary<TKey, TValue> : Dictionary<TKey, TValue>, IEqua
 
     public EquatableDictionary(
         IDictionary<TKey, TValue> dictionary,
-        IEqualityComparer<TKey>? keyComparer,
+        IEqualityComparer<TKey>? keyComparer = null,
         IEqualityComparer<TValue>? valueComparer = null) : base(dictionary, keyComparer)
     {
         if (valueComparer != null && valueComparer != EqualityComparer<TValue>.Default)
@@ -41,7 +41,7 @@ public class EquatableDictionary<TKey, TValue> : Dictionary<TKey, TValue>, IEqua
 
     public EquatableDictionary(
         IEnumerable<KeyValuePair<TKey, TValue>> collection,
-        IEqualityComparer<TKey>? keyComparer,
+        IEqualityComparer<TKey>? keyComparer = null,
         IEqualityComparer<TValue>? valueComparer = null) : base(collection, keyComparer)
     {
         if (valueComparer != null && valueComparer != EqualityComparer<TValue>.Default)
@@ -58,7 +58,7 @@ public class EquatableDictionary<TKey, TValue> : Dictionary<TKey, TValue>, IEqua
     }
 #endif
 
-    public IEqualityComparer<TValue> ValueEqualityComparer => _valueComparer ?? EqualityComparer<TValue>.Default;
+    public IEqualityComparer<TValue> ValueComparer => _valueComparer ?? EqualityComparer<TValue>.Default;
 
     public override bool Equals(object? other) => Equals(other as EquatableDictionary<TKey, TValue>);
 
