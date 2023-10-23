@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace IT.Collections.Equatable;
 
-public class EquatableReadOnlySet<T> : IReadOnlySet<T>, IEquatable<EquatableReadOnlySet<T>>
+internal class EquatableReadOnlySet<T> : IReadOnlySet<T>, IEquatable<EquatableReadOnlySet<T>>
 {
     private readonly IEqualityComparer<T> _comparer;
     private readonly IReadOnlySet<T> _set;

@@ -4,7 +4,7 @@ using System.Collections.ObjectModel;
 
 namespace IT.Collections.Equatable;
 
-public class EquatableReadOnlyDictionary<TKey, TValue> : ReadOnlyDictionary<TKey, TValue>, IEquatable<EquatableReadOnlyDictionary<TKey, TValue>>
+internal class EquatableReadOnlyDictionary<TKey, TValue> : ReadOnlyDictionary<TKey, TValue>, IEquatable<EquatableReadOnlyDictionary<TKey, TValue>>
     where TKey : notnull
 {
     private readonly IEqualityComparer<TKey> _keyComparer;

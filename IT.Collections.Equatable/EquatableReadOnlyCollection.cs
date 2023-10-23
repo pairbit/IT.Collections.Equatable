@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace IT.Collections.Equatable;
 
-public class EquatableReadOnlyCollection<T> : IReadOnlyCollection<T>, IEquatable<EquatableReadOnlyCollection<T>>
+internal class EquatableReadOnlyCollection<T> : IReadOnlyCollection<T>, IEquatable<EquatableReadOnlyCollection<T>>
 {
     private readonly IEqualityComparer<T> _comparer;
     private readonly IReadOnlyCollection<T> _collection;
