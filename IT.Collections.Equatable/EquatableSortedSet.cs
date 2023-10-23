@@ -32,12 +32,25 @@ public class EquatableSortedSet<T> : SortedSet<T>, IEquatable<EquatableSortedSet
     public override int GetHashCode()
     {
         var hash = new HashCode();
-        hash.Add(Comparer);
-        //TODO: GetHashCode ????
-        foreach (var item in this)
+        var comparer = Comparer;
+        hash.Add(comparer);
+
+        if (comparer is IEqualityComparer<T> equalityComparer)
         {
-            hash.Add(item);
+            foreach (var item in this)
+            {
+                hash.Add(item, equalityComparer);
+            }
         }
+        else
+        {
+            //TODO: GetHashCode ????
+            foreach (var item in this)
+            {
+                hash.Add(item);
+            }
+        }
+        
         return hash.ToHashCode();
     }
 }

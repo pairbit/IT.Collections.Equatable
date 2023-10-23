@@ -39,9 +39,17 @@ public class Tests
 
     public void FactoryStringTest<TFactory>() where TFactory : IEnumerableFactory
     {
-        var comparers = StringComparer.Ordinal.ToComparers();
-        var comparers2 = StringComparer.OrdinalIgnoreCase.ToComparers();
-        FactoryTest(_registry.GetFactory<TFactory>(), Builder, in comparers, in comparers2);
+        var comparers = StringComparer.OrdinalIgnoreCase.ToComparers();
+        var comparers2 = StringComparer.Ordinal.ToComparers();
+        try
+        {
+            FactoryTest(_registry.GetFactory<TFactory>(), Builder, in comparers, in comparers2);
+        }
+        catch (Exception)
+        {
+            Console.WriteLine($"{typeof(TFactory).FullName} error");
+            throw;
+        }
     }
 
     public void FactoryTest<T>(IEnumerableFactory factory, EnumerableBuilder<T, int> builder,
@@ -106,12 +114,21 @@ public class Tests
         Assert.That(y.Equals(x), Is.False);
     }
 
+    static bool flag;
+
     private static void Builder(TryAdd<string?> tryAdd, in int size)
     {
         for (int i = 0; i < size; i++)
         {
-            tryAdd($"test {i}");
-            tryAdd($"tEsT {i}");
+            if (flag)
+            {
+                tryAdd($"test {i}");
+            }
+            else
+            {
+                tryAdd($"tEsT {i}");
+            }
+            flag = !flag;
         }
     }
 }
