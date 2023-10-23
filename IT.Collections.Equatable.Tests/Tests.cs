@@ -23,7 +23,9 @@ public class Tests
     [SetUp]
     public void Setup()
     {
-        _registry = new EnumerableFactoryRegistry().RegisterFactoriesEquatable();
+        _registry = new EnumerableFactoryRegistry()
+            .RegisterFactoriesDefault()
+            .RegisterFactoriesEquatable(RegistrationBehavior.OverwriteExisting);
     }
 
     [Test]
