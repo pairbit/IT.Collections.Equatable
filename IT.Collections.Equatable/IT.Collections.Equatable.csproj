@@ -7,7 +7,7 @@
 	<PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
 	<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 	<Company />
-	<Description></Description>
+	<Description>Implementation of equatable collections</Description>
 	<PackageLicenseExpression>MIT</PackageLicenseExpression>
     <RepositoryUrl>https://github.com/pairbit/IT.Collections.Equatable</RepositoryUrl>
 	<PublishRepositoryUrl>true</PublishRepositoryUrl>
@@ -24,6 +24,7 @@
 	<SymbolPackageFormat>snupkg</SymbolPackageFormat>
 	<EmbedUntrackedSources>true</EmbedUntrackedSources>
 	<DebugType>full</DebugType>
+	<NoWarn>$(NoWarn);IDE1006;IDE0049</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>

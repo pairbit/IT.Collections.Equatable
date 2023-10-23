@@ -6,7 +6,9 @@ namespace IT.Collections.Equatable.Factory;
 
 public class EquatableListFactory : ListFactory
 {
-    public override EnumerableKind Kind => EnumerableKind.Equatable;
+    public override Type EnumerableType => typeof(EquatableList<>);
+
+    public override EnumerableKind Kind => base.Kind | EnumerableKind.Equatable;
 
     public
 #if NET5_0_OR_GREATER

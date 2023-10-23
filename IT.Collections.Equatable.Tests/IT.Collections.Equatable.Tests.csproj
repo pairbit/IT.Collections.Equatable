@@ -17,7 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\IT.Collections.Equatable\IT.Collections.Equatable.csproj" />
+    <ProjectReference Include="..\IT.Collections.Equatable.Factory\IT.Collections.Equatable.Factory.csproj" />
   </ItemGroup>
 
 </Project>

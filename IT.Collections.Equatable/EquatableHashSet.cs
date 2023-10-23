@@ -11,7 +11,7 @@ public class EquatableHashSet<T> : HashSet<T>, IEquatable<EquatableHashSet<T>>
     {
     }
 
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#if !NET461 && !NETSTANDARD2_0
 
     public EquatableHashSet(int capacity, IEqualityComparer<T>? comparer = null) : base(capacity, comparer)
     {
