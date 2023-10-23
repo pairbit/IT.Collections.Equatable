@@ -1,36 +1,42 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace IT.Collections.Equatable;
 
+using Internal;
+
 public class EquatableSortedSet<T> : SortedSet<T>, IEquatable<EquatableSortedSet<T>>
 {
-    private readonly IEqualityComparer<T> _equalityComparer;
-
-    public EquatableSortedSet(IComparer<T>? comparer = null, IEqualityComparer<T>? equalityComparer = null) : base(comparer)
+    public EquatableSortedSet(IComparer<T>? comparer = null) : base(comparer)
     {
-        _equalityComparer = equalityComparer ?? EqualityComparer<T>.Default;
     }
 
-    public EquatableSortedSet(IEnumerable<T> collection, IComparer<T>? comparer = null, IEqualityComparer<T>? equalityComparer = null) : base(collection, comparer)
+    public EquatableSortedSet(IEnumerable<T> collection, IComparer<T>? comparer = null) : base(collection, comparer)
     {
-        _equalityComparer = equalityComparer ?? EqualityComparer<T>.Default;
     }
 
-    public IEqualityComparer<T> EqualityComparer => _equalityComparer;
+    public override bool Equals(object? other) => Equals(other as EquatableSortedSet<T>);
 
-    public override bool Equals(object? obj) => Equals(obj as EquatableSortedSet<T>);
+    public bool Equals(EquatableSortedSet<T>? other)
+    {
+        if (other == this) return true;
+        if (other == null || other.Count != Count) return false;
 
-    public bool Equals(EquatableSortedSet<T>? other) => ReferenceEquals(this, other) || other is not null && this.SequenceEqual(other, _equalityComparer);
+        var comparer = Comparer;
+        var otherComparer = other.Comparer;
+
+        return (comparer == otherComparer || comparer.Equals(otherComparer)) &&
+                SequenceEqual.EnumerableRequired(this, other, comparer);
+    }
 
     public override int GetHashCode()
     {
         var hash = new HashCode();
 
+        //TODO: GetHashCode ????
         foreach (var item in this)
         {
-            hash.Add(item, _equalityComparer);
+            hash.Add(item);
         }
         return hash.ToHashCode();
     }

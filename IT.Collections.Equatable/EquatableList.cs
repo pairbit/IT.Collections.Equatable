@@ -1,36 +1,47 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace IT.Collections.Equatable;
 
+using Internal;
+
 public class EquatableList<T> : List<T>, IEquatable<EquatableList<T>>
 {
-    private readonly IEqualityComparer<T> _comparer;
+    private readonly IEqualityComparer<T>? _comparer;
 
     public EquatableList(IEqualityComparer<T>? comparer = null)
     {
-        _comparer = comparer ?? EqualityComparer<T>.Default;
+        if (comparer != null && comparer != EqualityComparer<T>.Default)
+            _comparer = comparer;
     }
 
     public EquatableList(int capacity, IEqualityComparer<T>? comparer = null) : base(capacity)
     {
-        _comparer = comparer ?? EqualityComparer<T>.Default;
+        if (comparer != null && comparer != EqualityComparer<T>.Default)
+            _comparer = comparer;
     }
 
     public EquatableList(IEnumerable<T> collection, IEqualityComparer<T>? comparer = null) : base(collection)
     {
-        _comparer = comparer ?? EqualityComparer<T>.Default;
+        if (comparer != null && comparer != EqualityComparer<T>.Default)
+            _comparer = comparer;
     }
 
-    public IEqualityComparer<T> Comparer => _comparer;
+    public IEqualityComparer<T>? EqualityComparer => _comparer ?? EqualityComparer<T>.Default;
 
-    public override bool Equals(object? obj) => Equals(obj as EquatableList<T>);
+    public override bool Equals(object? other) => Equals(other as EquatableList<T>);
 
     public bool Equals(EquatableList<T>? other)
-        => this == other || (other != null &&
-        (_comparer == other._comparer || (_comparer != null && _comparer.Equals(other._comparer))) &&
-        this.SequenceEqual(other, _comparer));
+    {
+        if (other == this) return true;
+        if (other == null || other.Count != Count) return false;
+
+        var comparer = _comparer;
+        var otherComparer = other._comparer;
+
+        return (comparer == otherComparer || (comparer != null && comparer.Equals(otherComparer))) &&
+                SequenceEqual.List(this, other, comparer);
+    }
 
     public override int GetHashCode()
     {

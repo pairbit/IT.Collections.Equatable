@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace IT.Collections.Equatable;
+
+using Internal;
 
 public class EquatableHashSet<T> : HashSet<T>, IEquatable<EquatableHashSet<T>>
 {
@@ -22,9 +23,27 @@ public class EquatableHashSet<T> : HashSet<T>, IEquatable<EquatableHashSet<T>>
     {
     }
 
-    public override bool Equals(object? obj) => Equals(obj as EquatableHashSet<T>);
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+    public int Capacity
+    {
+        get => EnsureCapacity(0);
+        set => EnsureCapacity(value);
+    }
+#endif
 
-    public bool Equals(EquatableHashSet<T>? other) => ReferenceEquals(this, other) || other is not null && this.SequenceEqual(other, Comparer);
+    public override bool Equals(object? other) => Equals(other as EquatableHashSet<T>);
+
+    public bool Equals(EquatableHashSet<T>? other)
+    {
+        if (other == this) return true;
+        if (other == null || other.Count != Count) return false;
+
+        var comparer = Comparer;
+        var otherComparer = other.Comparer;
+        
+        return (comparer == otherComparer || comparer.Equals(otherComparer)) &&
+                SequenceEqual.EnumerableRequired(this, other, comparer);
+    }
 
     public override int GetHashCode()
     {
