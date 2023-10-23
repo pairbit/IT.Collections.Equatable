@@ -9,6 +9,26 @@ Implementation of collections factory for equatable
 ```csharp
 var registry = new EnumerableFactoryRegistry();
 //var registry = new ConcurrentEnumerableFactoryRegistry();
-registry.RegisterFactoriesDefault()
-		.RegisterFactoriesEquatable(RegistrationBehavior.OverwriteExisting);
+registry.RegisterFactoriesDefault();
+registry.RegisterFactoriesEquatable(RegistrationBehavior.OverwriteExisting);
+```
+
+## New list and equals
+
+```csharp
+var listFactory = registry.GetFactory<ListFactory>();
+Assert.That(listFactory is EquatableListFactory, Is.True);
+
+var comparers = StringComparer.OrdinalIgnoreCase.ToComparers();
+
+var list = listFactory.Empty(in comparers);
+Assert.That(list is EquatableList<string?>, Is.True);
+
+list.Add("ignoreCase");
+
+var list2 = listFactory.Empty(in comparers);
+list2.Add("IgNoReCaSe");
+        
+Assert.That(list, Is.EqualTo(list2));
+Assert.That(list.GetHashCode(), Is.EqualTo(list2.GetHashCode()));
 ```
