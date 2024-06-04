@@ -15,14 +15,15 @@ jobs:
         os: [ubuntu-latest, macos-latest, windows-latest]
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Setup
-        uses: actions/setup-dotnet@v3
+        uses: actions/setup-dotnet@v4
         with:
           dotnet-version: |
             3.1.x
             6.0.x
             7.0.x
+            8.0.x
     
       - name: Restore
         run: dotnet restore IT.Collections.Equatable.sln
@@ -31,22 +32,22 @@ jobs:
         run: dotnet build IT.Collections.Equatable.sln --configuration Release --no-restore 
         
       - name: Test
-        run: dotnet test IT.Collections.Equatable.Tests/IT.Collections.Equatable.Tests.csproj --no-restore
+        run: dotnet test IT.Collections.Equatable.Tests/IT.Collections.Equatable.Tests.csproj --configuration Release --no-restore
 
   publish:
     needs: [build]
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Publish IT.Collections.Equatable
-        uses: pairbit/publish-nuget@v2.6.0
+        uses: pairbit/publish-nuget@v2.6.1
         with:
             PROJECT_FILE_PATH: IT.Collections.Equatable/IT.Collections.Equatable.csproj
             NUGET_KEY: ${{secrets.NUGET}}
             TAG_COMMIT: true
 
       - name: Publish IT.Collections.Equatable.Factory
-        uses: pairbit/publish-nuget@v2.6.0
+        uses: pairbit/publish-nuget@v2.6.1
         with:
             PROJECT_FILE_PATH: IT.Collections.Equatable.Factory/IT.Collections.Equatable.Factory.csproj
             NUGET_KEY: ${{secrets.NUGET}}
